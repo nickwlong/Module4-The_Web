@@ -8,4 +8,9 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  post '/sort-names' do
+    names = params[:names]
+    return names.split(',').sort.join(',')
+  end
+
 end

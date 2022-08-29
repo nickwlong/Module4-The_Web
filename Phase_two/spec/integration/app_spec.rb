@@ -7,20 +7,22 @@ describe Application do
 
   let(:app) { Application.new }
 
-  context "GET /" do
-    it 'returns 200 OK' do
-
-      response = post('/sort-names?names=Joe,Alice,Zoe,Julia,Kieran')
-
+  context "POST /sort-names" do
+    it 'Sorts and returns letters alphabetically' do
+      response = post('/sort-names?names=B,C,E,A,D')
       expect(response.status).to eq(200)
-      expect(response.body).to eq "Alice,Joe,Julia,Kieran,Zoe"
+      expect(response.body).to eq('A,B,C,D,E')
+    end
+
+    it 'Sorts the example body parameters alphabetically' do
+      response = post('/sort-names?names=Joe,Alice,Zoe,Julia,Kieran')
+      expect(response.status).to eq(200)
+      expect(response.body).to eq('Alice,Joe,Julia,Kieran,Zoe')
     end
 
     it 'returns 404 Not Found' do
       response = get('/posts?id=276278')
-
       expect(response.status).to eq(404)
-      # expect(response.body).to eq(expected_response)
     end
   end
 end
