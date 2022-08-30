@@ -4,14 +4,14 @@ _Copy this design recipe template to test-drive a Sinatra route._
 
 ## 1. Design the Route Signature
 
-# Request:
-GET /albums
+  # Request:
+  GET /albums
 
-# Expected response (200 OK)
-List of albums
+  # Expected response (200 OK)
+  List of albums
 
-# Request:
-GET /albums/:id
+  # Request:
+  GET /albums/:id
 
 # Expected response (200 OK)
 Returns a specific album
