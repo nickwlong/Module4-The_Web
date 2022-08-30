@@ -25,4 +25,18 @@ describe Application do
       expect(response.status).to eq(404)
     end
   end
+
+  context "GET to /" do
+    it 'contains a h1 title' do
+      response = get('/hello')
+  
+      expect(response.body).to include('<h1>Hello</h1>')
+    end
+    
+    it 'contains a body' do
+      response = get('/hello')
+  
+      expect(response.body).to include('<body>')
+    end
+  end
 end
