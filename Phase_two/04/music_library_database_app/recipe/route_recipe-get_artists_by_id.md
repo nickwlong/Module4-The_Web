@@ -6,10 +6,10 @@ _Copy this design recipe template to test-drive a Sinatra route._
 ## 1. Design the Route Signature
 
     # Request:
-    GET /artists
+    GET /artists/1
 
     # Expected response (200 OK)
-    Pixies, ABBA, Taylor Swift, Nina Simone
+    Pixies
 
 
 ## 2. Design the Response
@@ -23,10 +23,12 @@ Your response might return plain text, JSON, or HTML code.
 _Replace the below with your own design. Think of all the different possible responses your route will return._
 
 
-query get /artists:
+query get /artist/1:
 
 text response:
-    Pixies, ABBA, Taylor Swift, Nina Simone
+    Pixies
+
+
 
 
 ## 3. Write Examples
@@ -36,12 +38,21 @@ _Replace these with your own design._
 ```
 # Request:
 
-GET /artists
+GET /artists/1
 
 # Expected response:
 
 Response for 200 OK
-Pixies, ABBA, Taylor Swift, Nina Simone
+Pixies
+
+# Request:
+
+GET /artists/2
+
+# Expected response:
+
+Response for 200 OK
+ABBA
 ```
 
 
