@@ -77,20 +77,6 @@ describe Application do
     # end
   end
 
-  context "POST /albums" do
-    it 'adds album to database' do
-      response = post('/albums', title: 'OK Computer', release_year: '1997', artist_id: '1')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to eq ""
-      repo = AlbumRepository.new
-      
-      response2 = get('/albums')
-
-      expect(response2.body).to include "OK Computer"
-    end
-  end
-
   context "GET /artists" do
     # Add a route GET /artists which returns an HTML page with the list of artists. 
     it 'returns HTML page with a list of artists, each artist is linked to artist page' do
@@ -135,8 +121,78 @@ describe Application do
 
   #   end
   # end
+  context "GET /albums/new" do
+    it 'returns the form page' do
+      response = get('/albums/new')
 
-  
+      expect(response.status).to eq (200)
+      expect(response.body).to include ('<h1>Add an album:</h1>')
 
+      expect(response.body).to include ('<form action="/albums" method = "POST">')
+      expect(response.body).to include ('<input type="text" name="title">')
+      
+    end
+  end
+
+  context "POST /albums" do
+    it 'Returns a success page' do
+      response = post(
+        '/albums',
+        title: 'Test Album',
+        release_year: '2022',
+        artist: 'Test Artist'
+      )
+      
+      expect(response.status).to eq (200)
+      expect(response.body).to include ('<p>Your album \'Test Album\' has been added!</p>')
+
+    end
+    it 'Returns a success page' do
+      response = post(
+        '/albums',
+        title: 'Another test',
+        release_year: '2022',
+        artist: 'Test Artist'
+      )
+      
+      expect(response.status).to eq (200)
+      expect(response.body).to include ('<p>Your album \'Another test\' has been added!</p>')
+    end
+    it 'Has added album to database' do
+      response = post(
+        '/albums',
+        title: 'Another test',
+        release_year: '2022',
+        artist: 'Test Artist'
+      )
+      expect(response.status).to eq 200
+
+      response = get('/albums')
+      expect(response.body).to include "<a href='albums/13' >Another test</a>"
+    end
+  end
+
+  context 'POST /artists' do
+    it 'Returns a success page' do
+      response = post(
+        '/artists',
+        name: 'Testartist',
+        genre: 'Rock'
+      )
+      
+      expect(response.status).to eq (200)
+      expect(response.body).to include ('<h1>Your artist \'Testartist\' has been added!</h1>')
+
+    end
+    it 'Returns a success page' do
+      response = post(
+        '/artists',
+        name: 'Los Campesinos',
+        genre: 'Alternative'
+      )
+      
+      expect(response.status).to eq (200)
+      expect(response.body).to include ('<h1>Your artist \'Los Campesinos\' has been added!</h1>')
+    end
+  end
 end
-
